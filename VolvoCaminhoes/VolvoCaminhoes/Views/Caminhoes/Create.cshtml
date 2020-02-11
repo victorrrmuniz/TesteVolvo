@@ -1,0 +1,52 @@
+﻿@model VolvoCaminhoes.Models.Caminhao
+
+@{
+    ViewData["Title"] = "Create";
+    int ano = DateTime.Now.Year;
+}
+
+<h2>Criar</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Modelo" class="control-label"></label>
+                <select asp-for="Modelo" class="form-control">
+                    <option value="FH">FH</option>
+                    <option value="FM">FM</option>
+                    <option value="XH">XH</option>
+                    <option value="N10">N10</option>
+                    <option value="NL">NL</option>
+                </select>
+                <span asp-validation-for="Modelo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnoFabricacao" class="control-label">Ano de Fabricação</label>
+                <input asp-for="AnoFabricacao" class="form-control" value="@ano" disabled="disabled"/>
+                <span asp-validation-for="AnoFabricacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnoModelo" class="control-label">Ano Modelo</label>
+                <select asp-for="AnoModelo" class="form-control">
+                    <option value="@ano">@ano</option>
+                    <option value="@(ano+1)">@(ano+1)</option>
+                </select>
+                <span asp-validation-for="AnoModelo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
